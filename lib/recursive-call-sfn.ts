@@ -22,7 +22,7 @@ export class RecursiveSfnCallStack extends cdk.Stack {
     );
 
     const wait = new sfn.Wait(this, "Wait", {
-      time: sfn.WaitTime.duration(cdk.Duration.seconds(5)),
+      time: sfn.WaitTime.duration(cdk.Duration.minutes(1)),
     });
 
     const callLambda = new tasks.LambdaInvoke(this, "SfnLambdaInvoke", {
@@ -59,7 +59,7 @@ export class RecursiveSfnCallStack extends cdk.Stack {
 
     const stateMachine = new sfn.StateMachine(this, "StateMachine", {
       definitionBody: sfn.DefinitionBody.fromChainable(definition),
-      timeout: cdk.Duration.minutes(5),
+      timeout: cdk.Duration.days(1),
       comment: "a super cool state machine",
     });
 
